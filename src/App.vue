@@ -1,12 +1,27 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+const a = ref(1)
+const b = ref(2)
+const c = computed(() => a.value + b.value)
+const test = true
+
+async function handleClick() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+  const posts = await res.json()
+  posts.forEach((post) => {
+    if (post) {
+      console.log(post)
+    }
+  })
+}
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <button @click="handleClick">Click me</button>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
       <nav>
